@@ -2,11 +2,6 @@
 hide methods
 skinparam ClassAttributeIconSize 0
 
-entity inspector {
-    IdInspector: int <<PK>>
-    --
-    esJefe
-}
 
 entity "Centro Educativo" as CentroEducativo {
     IdCentro: int <<PK>>
@@ -31,11 +26,17 @@ entity Anotación {
 
 }
 
-entity Actividad {
 
-}
 
 entity Visita {
+    OID_Visita: int <<PK>>
+    --
+    Fecha
+    HoraInicio
+    HoraFin
+
+    EstadoVisita
+
 
 }
 
@@ -44,6 +45,12 @@ entity Informe {
 }
 
 entity Tarea {
+    OID_Tarea: int <<PK>>
+    --
+    Fecha
+    HoraInicio
+    HoraFin
+
     Descripcion
 }
 
@@ -58,22 +65,31 @@ entity Zona {
 }
 
 entity Persona {
-    DNI: <<PK>>
+    OID_Persona: <<PK>>
     --
+    DNI: <<AK>>
     Nombre
     Apellidos
 }
 
+entity inspector {
+    OID_Persona: <<FK>> <<PK>>
+    --
+    esJefe
+}
 entity Alumno {
-
+    OID_Persona: <<FK>> <<PK>>
+    --
 }
 
 entity Profesor {
-
+    OID_Persona: <<FK>> <<PK>>
+    --
 }
 
 entity TutorLegal {
-
+    OID_Persona: <<FK>> <<PK>>
+    --
 }
 
 entity Tutela {
