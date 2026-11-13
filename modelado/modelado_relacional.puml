@@ -19,11 +19,26 @@ entity Dieta {
 }
 
 entity Cita {
+    num_solicitud: int <<PK>>
+    --
+    Fecha 
+    Hora 
+    Titulo
+    TextoSolicitud
+    DocumentaciónAdjunta [0..*]
+    Estado: e_EstadoCita
+    Prioridad: e_Prioridad [0..1]
+    Procedencia: e_Procedencia
 
 }
 
 entity Anotación {
-
+    OID_Anotacion: int <<PK>>
+    --
+    Fecha
+    Titulo
+    Descripcion
+    Prioridad: e_Prioridad
 }
 
 

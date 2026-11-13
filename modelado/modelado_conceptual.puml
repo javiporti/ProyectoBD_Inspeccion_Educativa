@@ -103,7 +103,7 @@ class Cita{
     Procedencia: e_Procedencia
 }
 
-class Anotación{
+class Anotacion{
     Fecha
     Titulo
     Descripcion
@@ -137,7 +137,7 @@ class DiasAsuntosPersonales {
 }
 
 class Zona {
-    Código
+    Codigo
     Nombre
 }
 
