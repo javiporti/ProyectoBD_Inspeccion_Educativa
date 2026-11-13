@@ -4,7 +4,7 @@ skinparam ClassAttributeIconSize 0
 
 
 entity "Centro Educativo" as CentroEducativo {
-    IdCentro: int <<PK>>
+    ID_Centro: int <<PK>>
     --
     Ubicacion
     Prioridad
@@ -19,7 +19,7 @@ entity Dieta {
 }
 
 entity Cita {
-    num_solicitud: int <<PK>>
+    Num_solicitud: int <<PK>>
     --
     Fecha 
     Hora 
