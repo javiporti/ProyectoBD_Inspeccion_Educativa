@@ -29,7 +29,7 @@ entity Anotación {
 
 
 entity Visita {
-    OID_Visita: int <<PK>>
+    oidVisita: int <<PK>>
     --
     Fecha
     HoraInicio
@@ -45,7 +45,7 @@ entity Informe {
 }
 
 entity Tarea {
-    OID_Tarea: int <<PK>>
+    oidarea: int <<PK>>
     --
     Fecha
     HoraInicio
@@ -65,7 +65,7 @@ entity Zona {
 }
 
 entity Persona {
-    OID_Persona: <<PK>>
+    oidPersona: <<PK>>
     --
     DNI: <<AK>>
     Nombre
@@ -73,22 +73,22 @@ entity Persona {
 }
 
 entity inspector {
-    OID_Persona: <<FK>> <<PK>>
+    oidPersona: <<FK>> <<PK>>
     --
     esJefe
 }
 entity Alumno {
-    OID_Persona: <<FK>> <<PK>>
+    oidPersona: <<FK>> <<PK>>
     --
 }
 
 entity Profesor {
-    OID_Persona: <<FK>> <<PK>>
+    oidPersona: <<FK>> <<PK>>
     --
 }
 
 entity TutorLegal {
-    OID_Persona: <<FK>> <<PK>>
+    oidPersona: <<FK>> <<PK>>
     --
 }
 
