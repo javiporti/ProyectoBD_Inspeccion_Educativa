@@ -11,11 +11,13 @@ entity "Centro Educativo" as CentroEducativo {
 }
 
 entity Desplazamiento {
-
+    oidVisita: int <<PK>>
+    --
 }
 
 entity Dieta {
-
+    oidVisita: int <<PK>>
+    --
 }
 
 entity Cita {
@@ -55,7 +57,9 @@ entity Tarea {
 }
 
 entity DiasAsuntosPersonales {
-
+    oidDias: int <<PK>>
+    --
+    
 }
 
 entity Zona {
