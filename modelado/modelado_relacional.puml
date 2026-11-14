@@ -1,70 +1,73 @@
-@startuml modelado_conceptual
+@startuml modelado_relacional
 hide methods
 skinparam ClassAttributeIconSize 0
 
 
-entity "Centro Educativo" as CentroEducativo {
+entity "Centros Educativos" as CentrosEducativos {
     IdCentro: int <<PK>>
     --
     Ubicacion
     Prioridad
 }
 
-entity Desplazamiento {
+entity Desplazamientos {
 
 }
 
-entity Dieta {
+entity Dietas {
 
 }
 
-entity Cita {
+entity Citas {
 
 }
 
-entity Anotación {
+entity Anotaciones {
 
 }
 
-
-
-entity Visita {
-    OID_Visita: int <<PK>>
+entity Visitas {
+    *oid_Visita : int <<PK>>
     --
-    Fecha
-    HoraInicio
-    HoraFin
-
-    EstadoVisita
-
-
+    *Fecha : date
+    *HoraInicio : time
+    *HoraFin : time
+    *EstadoVisita : e_EstadoVisita
+    *Responsable : int <<FK>>
+    *Jefe : int <<FK>>
+    *IdCentro : int <<FK>>
 }
 
-entity Informe {
-
-}
-
-entity Tarea {
-    OID_Tarea: int <<PK>>
+entity Informes {
+    *oid_Informe : int <<PK>>
     --
-    Fecha
-    HoraInicio
-    HoraFin
+    *Prioridad : e_Prioridad
+    *Observacion : text
+    *oid_Visita : int <<FK>> <<AK>>
+}
 
-    Descripcion
+entity Tareas {
+    *oid_Tarea : int <<PK>>
+    --
+    *Fecha : date
+    *HoraInicio : time
+    *HoraFin : time
+    *Descripcion : text
+    *Responsable : int <<FK>>
+    *Jefe : int <<FK>>
 }
 
 entity DiasAsuntosPersonales {
 
 }
 
-entity Zona {
+entity Zonas {
     Codigo: int <<PK>>
     --
     Nombre
 }
 
-entity Persona {
+entity Personas {
     OID_Persona: <<PK>>
     --
     DNI: <<AK>>
@@ -72,29 +75,36 @@ entity Persona {
     Apellidos
 }
 
-entity inspector {
+entity inspectores {
     OID_Persona: <<FK>> <<PK>>
     --
     esJefe
 }
-entity Alumno {
+entity Alumnos {
     OID_Persona: <<FK>> <<PK>>
     --
 }
 
-entity Profesor {
+entity Profesores {
     OID_Persona: <<FK>> <<PK>>
     --
 }
 
-entity TutorLegal {
+entity TutoresLegales {
     OID_Persona: <<FK>> <<PK>>
     --
 }
 
-entity Tutela {
+entity Tutelas {
 
 }
+
+Inspectores ||--o{ Visitas : realiza (Responsable)
+Inspectores ||--o{ Visitas : asigna (Jefe)
+Inspectores ||--o{ Tareas : realiza (Responsable)
+Inspectores ||--o{ Tareas : asigna (Jefe)
+CentrosEducativos ||--o{ Visitas : recibe
+Visitas ||--o| Informes : contiene
 
 @enduml
 
