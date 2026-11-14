@@ -27,15 +27,15 @@ entity Anotaciones {
 }
 
 entity Visitas {
-    *oid_Visita : int <<PK>>  
+    *oid_Visita : int <<PK>>
     --
     *Fecha : date
     *HoraInicio : time
     *HoraFin : time
     *EstadoVisita : e_EstadoVisita
-    *Responsable : int <<FK>> --> Inspectores
-    *Jefe : int <<FK>> --> Inspectores
-    *IdCentro : int <<FK>> --> CentrosEducativos
+    *Responsable : int <<FK>> -> Inspectores
+    *Jefe : int <<FK>> -> Inspectores
+    *IdCentro : int <<FK>> -> CentrosEducativos
 }
 
 entity Informes {
@@ -43,7 +43,7 @@ entity Informes {
     --
     *Prioridad : e_Prioridad
     *Observacion : text
-    *oid_Visita : int <<FK>> <<AK>> --> Visitas
+    *oid_Visita : int <<FK>> <<AK>> -> Visitas
 }
 
 entity Tareas {
@@ -53,8 +53,8 @@ entity Tareas {
     *HoraInicio : time
     *HoraFin : time
     *Descripcion : text
-    *Responsable : int <<FK>> --> Inspectores
-    *Jefe : int <<FK>> --> Inspectores
+    *Responsable : int <<FK>> -> Inspectores
+    *Jefe : int <<FK>> -> Inspectores
 }
 
 entity DiasAsuntosPersonales {
