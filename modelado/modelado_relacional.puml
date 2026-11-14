@@ -75,24 +75,39 @@ entity Personas {
     Apellidos
 }
 
-entity inspectores {
+entity Inspectores {
     oid_Persona: <<FK>> <<PK>>
     --
     esJefe
+    Codigo: <<FK>> -> Zona
 }
 entity Alumnos {
-    oid_Persona: <<FK>> <<PK>>
+    oid_Persona: <<FK>> <<PK>> -> Persona
     --
+    Identificacion: <<FK>> -> CentroEducativo
 }
 
 entity Profesores {
-    oid_Persona: <<FK>> <<PK>>
+    oid_Persona: <<PK>> <<FK>> -> Persona
+    --
+    Identificacion: <<FK>> -> CentroEducativo
+}
+
+entity AsignaturasProfesor {
+    OID_Persona: <<FK>> <<PK>>
+    Asignatura: <<PK>>
     --
 }
 
 entity TutoresLegales {
-    oid_Persona: <<FK>> <<PK>>
+    oid_Persona: <<PK>> <<FK>> -> Persona
     --
+}
+
+entity ResponsablesDe {
+    oid_RD: <<PK>>
+    --
+    oid_Persona: <<FK>> -> TutorLegal, Alumno
 }
 
 entity Tutelas {
