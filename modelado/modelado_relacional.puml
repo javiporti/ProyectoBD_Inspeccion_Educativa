@@ -10,13 +10,6 @@ entity "Centro Educativo" as CentroEducativo {
     Prioridad
 }
 
-entity Desplazamiento {
-
-}
-
-entity Dieta {
-
-}
 
 entity Cita {
 
@@ -29,7 +22,7 @@ entity Anotación {
 
 
 entity Visita {
-    OID_Visita: int <<PK>>
+    oid_Visita: int <<PK>>
     --
     Fecha
     HoraInicio
@@ -45,7 +38,7 @@ entity Informe {
 }
 
 entity Tarea {
-    OID_Tarea: int <<PK>>
+    oid_Tarea: int <<PK>>
     --
     Fecha
     HoraInicio
@@ -54,9 +47,6 @@ entity Tarea {
     Descripcion
 }
 
-entity DiasAsuntosPersonales {
-
-}
 
 entity Zona {
     Codigo: int <<PK>>
@@ -112,6 +102,21 @@ entity Tutela {
 
 }
 
+entity Desplazamiento {
+    oid_Visita: int <<PK>> <<FK>> -> Visita
+    --
+}
+
+entity Dieta {
+    oid_Visita: int <<PK>> <<FK>> -> Visita
+    --
+}
+
+entity DiasAsuntosPersonales {
+    oid_Dias: int <<PK>>
+    --
+    
+}
 @enduml
 
 /'
