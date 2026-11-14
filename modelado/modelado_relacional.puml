@@ -68,7 +68,7 @@ entity Zonas {
 }
 
 entity Personas {
-    OID_Persona: <<PK>>
+    oid_Persona: <<PK>>
     --
     DNI: <<AK>>
     Nombre
@@ -76,22 +76,22 @@ entity Personas {
 }
 
 entity inspectores {
-    OID_Persona: <<FK>> <<PK>>
+    oid_Persona: <<FK>> <<PK>>
     --
     esJefe
 }
 entity Alumnos {
-    OID_Persona: <<FK>> <<PK>>
+    oid_Persona: <<FK>> <<PK>>
     --
 }
 
 entity Profesores {
-    OID_Persona: <<FK>> <<PK>>
+    oid_Persona: <<FK>> <<PK>>
     --
 }
 
 entity TutoresLegales {
-    OID_Persona: <<FK>> <<PK>>
+    oid_Persona: <<FK>> <<PK>>
     --
 }
 
