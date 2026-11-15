@@ -85,7 +85,7 @@ entity Zonas {
 }
 
 entity Persona {
-    OID_Persona: <<PK>>
+    oid_Persona: <<PK>>
     --
     DNI: <<AK>>
     Nombre
@@ -93,23 +93,39 @@ entity Persona {
 }
 
 entity inspector {
-    OID_Persona: <<FK>> <<PK>>
+    oid_Persona: <<PK>> <<FK>> -> Persona
     --
     esJefe
+    Codigo: <<FK>> -> Zona
 }
+
 entity Alumno {
-    OID_Persona: <<FK>> <<PK>>
+    oid_Persona: <<PK>> <<FK>> -> Persona
     --
+    Identificacion: <<FK>> -> CentroEducativo
 }
 
 entity Profesor {
+    oid_Persona: <<PK>> <<FK>> -> Persona
+    --
+    Identificacion: <<FK>> -> CentroEducativo
+}
+
+entity AsignaturaProfesor {
     OID_Persona: <<FK>> <<PK>>
+    Asignatura: <<PK>>
     --
 }
 
 entity TutorLegal {
-    OID_Persona: <<FK>> <<PK>>
+    oid_Persona: <<PK>> <<FK>> -> Persona
     --
+}
+
+entity ResponsableDe {
+    oid_RD: <<PK>>
+    --
+    oid_Persona: <<FK>> -> TutorLegal, Alumno
 }
 
 entity Tutela {
