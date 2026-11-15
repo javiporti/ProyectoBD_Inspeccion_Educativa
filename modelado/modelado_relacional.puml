@@ -3,11 +3,13 @@ hide methods
 skinparam ClassAttributeIconSize 0
 
 
-entity "Centro Educativo" as CentrosEducativos {
+entity "Centros Educativos" as CentrosEducativos {
     Identificacion: int <<PK>>
     --
     Ubicacion
     Prioridad
+    Zona: int <<FK>> -> Zonas
+    ProfesorResponsable: int <<FK>> <<AK>> [0..1] -> Profesores
 }
 
 entity Desplazamiento {
@@ -25,7 +27,7 @@ entity DocumentosCita {
      
 }
 entity Citas {
-    Num_solicitud: int <<PK>> <<FK>> -> DocumentosCita
+    Num_solicitud: int <<PK>> 
     --
     Fecha [0..1]
     Hora [0..1]
@@ -34,6 +36,9 @@ entity Citas {
     Estado: e_EstadoCita
     Prioridad: e_Prioridad [0..1]
     Procedencia: e_Procedencia
+    Tutor: int <<FK>> -> TutoresLegales
+    Alumno: int <<FK>> -> Alumnos
+    Inspector: int <<FK>> [0..1] -> Inspectores
 
 }
 
@@ -44,6 +49,8 @@ entity Anotaciones {
     Titulo
     Descripcion
     Prioridad: e_Prioridad
+    Inspector: int <<FK>> -> Inspectores
+    Centro: int <<FK>> -> CentrosEducativos
 }
 
 
@@ -82,6 +89,7 @@ entity Zonas {
     Codigo: int <<PK>>
     --
     Nombre: string <<AK>>
+    
 }
 
 entity Persona {
@@ -132,9 +140,11 @@ entity Tutela {
 
 }
 
+'------- ASOCIACIONES --------------------------------------
+DocumentosCita }o--|| Citas
 @enduml
 
-DocumentosCita }o--|| Citas
+
 /'
 JERARQUÍAS
 OP1 : Meter todo en una sola tabla con la superclase y la subclase
