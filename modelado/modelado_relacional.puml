@@ -18,19 +18,19 @@ entity Dieta {
 
 }
 
-entity DocumentoCita {
-    Num_solicitud: int <<PK>>
+entity DocumentosCita {
+    Num_solicitud: int <<PK>> <<FK>> -> Citas
+    DocumentacionAdjunta : string <<PK>>
     --
-    DocumentacionAdjunta: 
+     
 }
 entity Citas {
-    Num_solicitud: int <<PK>>
+    Num_solicitud: int <<PK>> <<FK>> -> DocumentosCita
     --
     Fecha [0..1]
     Hora [0..1]
     Titulo
     TextoSolicitud
-    DocumentacionAdjunta [0..*]
     Estado: e_EstadoCita
     Prioridad: e_Prioridad [0..1]
     Procedencia: e_Procedencia
@@ -38,7 +38,7 @@ entity Citas {
 }
 
 entity Anotaciones {
-    OID_Anotacion: int <<PK>>
+    oid_Anotacion: int <<PK>>
     --
     Fecha
     Titulo
@@ -81,7 +81,7 @@ entity DiasAsuntosPersonales {
 entity Zonas {
     Codigo: int <<PK>>
     --
-    Nombre
+    Nombre: string <<AK>>
 }
 
 entity Persona {
@@ -134,6 +134,7 @@ entity Tutela {
 
 @enduml
 
+DocumentosCita }o--|| Citas
 /'
 JERARQUÍAS
 OP1 : Meter todo en una sola tabla con la superclase y la subclase
