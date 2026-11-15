@@ -3,20 +3,54 @@ hide methods
 skinparam ClassAttributeIconSize 0
 
 
-entity "Centro Educativo" as CentroEducativo {
-    IdCentro: int <<PK>>
+entity "Centros Educativos" as CentrosEducativos {
+    Identificacion: int <<PK>>
     --
     Ubicacion
     Prioridad
+    Zona: int <<FK>> -> Zonas
+    ProfesorResponsable: int <<FK>> <<AK>> [0..1] -> Profesores
 }
 
-
-entity Cita {
+entity Desplazamiento {
 
 }
 
-entity Anotación {
+entity Dieta {
 
+}
+
+entity DocumentosCita {
+    Num_solicitud: int <<PK>> <<FK>> -> Citas
+    DocumentacionAdjunta : string <<PK>>
+    --
+     
+}
+entity Citas {
+    Num_solicitud: int <<PK>> 
+    --
+    Fecha [0..1]
+    Hora [0..1]
+    Titulo
+    TextoSolicitud
+    Estado: e_EstadoCita
+    Prioridad: e_Prioridad [0..1]
+    Procedencia: e_Procedencia
+    Tutor: int <<FK>> -> TutoresLegales
+    Alumno: int <<FK>> -> Alumnos
+    Inspector: int <<FK>> [0..1] -> Inspectores
+
+}
+
+entity Anotaciones {
+    oid_Anotacion: int <<PK>>
+    --
+    Fecha
+    Titulo
+    Descripcion
+    Prioridad: e_Prioridad
+    Inspector: int <<FK>> -> Inspectores
+    Centro: int <<FK>> -> CentrosEducativos
 }
 
 
@@ -47,11 +81,15 @@ entity Tarea {
     Descripcion
 }
 
+entity DiasAsuntosPersonales {
 
-entity Zona {
+}
+
+entity Zonas {
     Codigo: int <<PK>>
     --
-    Nombre
+    Nombre: string <<AK>>
+    
 }
 
 entity Persona {
@@ -82,7 +120,7 @@ entity Profesor {
 }
 
 entity AsignaturaProfesor {
-    OID_Persona: <<FK>> <<PK>>
+    oid_Persona: <<FK>> <<PK>>
     Asignatura: <<PK>>
     --
 }
@@ -102,6 +140,8 @@ entity Tutela {
 
 }
 
+'------- ASOCIACIONES --------------------------------------
+DocumentosCita }o--|| Citas
 entity Desplazamiento {
     oid_Visita: int <<PK>> <<FK>> -> Visita
     --
@@ -118,6 +158,7 @@ entity DiasAsuntosPersonales {
     
 }
 @enduml
+
 
 /'
 JERARQUÍAS

@@ -73,7 +73,7 @@ class Inspector{
 }
 
 class "Centro Educativo" as CentroEducativo{
-    Identificación {unique}
+    Identificacion {unique}
     Ubicación
     Prioridad: e_Prioridad
 }
@@ -97,13 +97,14 @@ class Cita{
     Hora [0..1]
     Titulo
     TextoSolicitud
+    Num_solicitud
     DocumentaciónAdjunta [0..*]
     Estado: e_EstadoCita
     Prioridad: e_Prioridad [0..1]
     Procedencia: e_Procedencia
 }
 
-class Anotación{
+class Anotacion{
     Fecha
     Titulo
     Descripcion
@@ -137,7 +138,7 @@ class DiasAsuntosPersonales {
 }
 
 class Zona {
-    Código
+    Codigo
     Nombre
 }
 
