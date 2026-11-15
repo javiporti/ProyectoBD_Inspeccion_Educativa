@@ -56,7 +56,7 @@ entity Anotaciones {
 
 
 entity Visita {
-    OID_Visita: int <<PK>>
+    oid_Visita: int <<PK>>
     --
     Fecha
     HoraInicio
@@ -72,7 +72,7 @@ entity Informe {
 }
 
 entity Tarea {
-    OID_Tarea: int <<PK>>
+    oid_Tarea: int <<PK>>
     --
     Fecha
     HoraInicio
@@ -120,7 +120,7 @@ entity Profesor {
 }
 
 entity AsignaturaProfesor {
-    OID_Persona: <<FK>> <<PK>>
+    oid_Persona: <<FK>> <<PK>>
     Asignatura: <<PK>>
     --
 }
