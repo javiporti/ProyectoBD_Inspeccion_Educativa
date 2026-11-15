@@ -3,8 +3,8 @@ hide methods
 skinparam ClassAttributeIconSize 0
 
 
-entity "Centro Educativo" as CentroEducativo {
-    ID_Centro: int <<PK>>
+entity "Centro Educativo" as CentrosEducativos {
+    Identificacion: int <<PK>>
     --
     Ubicacion
     Prioridad
@@ -18,21 +18,26 @@ entity Dieta {
 
 }
 
-entity Cita {
+entity DocumentoCita {
     Num_solicitud: int <<PK>>
     --
-    Fecha 
-    Hora 
+    DocumentacionAdjunta: 
+}
+entity Citas {
+    Num_solicitud: int <<PK>>
+    --
+    Fecha [0..1]
+    Hora [0..1]
     Titulo
     TextoSolicitud
-    DocumentaciónAdjunta [0..*]
+    DocumentacionAdjunta [0..*]
     Estado: e_EstadoCita
     Prioridad: e_Prioridad [0..1]
     Procedencia: e_Procedencia
 
 }
 
-entity Anotación {
+entity Anotaciones {
     OID_Anotacion: int <<PK>>
     --
     Fecha
@@ -73,7 +78,7 @@ entity DiasAsuntosPersonales {
 
 }
 
-entity Zona {
+entity Zonas {
     Codigo: int <<PK>>
     --
     Nombre
