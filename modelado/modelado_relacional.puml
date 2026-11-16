@@ -1,4 +1,4 @@
-@startuml modelado_conceptual
+@startuml modelado_relacional
 hide methods
 skinparam ClassAttributeIconSize 0
 
@@ -51,27 +51,32 @@ entity Anotaciones {
 entity Visita {
     oid_Visita: int <<PK>>
     --
-    Fecha
-    HoraInicio
-    HoraFin
-
-    EstadoVisita
-
-
+    *Fecha : date
+    *HoraInicio : time
+    *HoraFin : time
+    *EstadoVisita : e_EstadoVisita
+    *Responsable : int <<FK>> -> Inspectores
+    *Jefe : int <<FK>> -> Inspectores
+    *IdCentro : int <<FK>> -> CentrosEducativos
 }
 
-entity Informe {
-
-}
-
-entity Tarea {
-    oid_Tarea: int <<PK>>
+entity Informes {
+    *oid_Informe : int <<PK>>
     --
-    Fecha
-    HoraInicio
-    HoraFin
+    *Prioridad : e_Prioridad
+    *Observacion : text
+    *oid_Visita : int <<FK>> <<AK>> -> Visitas
+}
 
-    Descripcion
+entity Tareas {
+    *oid_Tarea : int <<PK>>
+    --
+    *Fecha : date
+    *HoraInicio : time
+    *HoraFin : time
+    *Descripcion : text
+    *Responsable : int <<FK>> -> Inspectores
+    *Jefe : int <<FK>> -> Inspectores
 }
 
 
@@ -83,7 +88,7 @@ entity Zonas {
     
 }
 
-entity Persona {
+entity Personas {
     oid_Persona: <<PK>>
     --
     DNI: <<AK>>
@@ -91,45 +96,52 @@ entity Persona {
     Apellidos
 }
 
-entity inspector {
-    oid_Persona: <<PK>> <<FK>> -> Persona
+entity Inspectores {
+    oid_Persona: <<FK>> <<PK>>
     --
     esJefe
-    Codigo: <<FK>> -> Zona
+    Codigo: <<FK>> -> Zonas
+}
+entity Alumnos {
+    oid_Persona: <<FK>> <<PK>> -> Persona
+    --
+    Identificacion: <<FK>> -> CentrosEducativos
 }
 
-entity Alumno {
+entity Profesores {
     oid_Persona: <<PK>> <<FK>> -> Persona
     --
-    Identificacion: <<FK>> -> CentroEducativo
+    Identificacion: <<FK>> -> CentrosEducativos
 }
 
-entity Profesor {
-    oid_Persona: <<PK>> <<FK>> -> Persona
-    --
-    Identificacion: <<FK>> -> CentroEducativo
-}
-
-entity AsignaturaProfesor {
+entity AsignaturasProfesor {
     oid_Persona: <<FK>> <<PK>>
     Asignatura: <<PK>>
     --
 }
 
-entity TutorLegal {
-    oid_Persona: <<PK>> <<FK>> -> Persona
+entity TutoresLegales {
+    oid_Persona: <<PK>> <<FK>> -> Personas
     --
 }
 
-entity ResponsableDe {
+entity ResponsablesDe {
     oid_RD: <<PK>>
     --
-    oid_Persona: <<FK>> -> TutorLegal, Alumno
+    oid_Persona: <<FK>> -> TutoresLegales, Alumnos
 }
 
-entity Tutela {
+entity Tutelas {
 
 }
+
+Inspectores ||--o{ Visitas : realiza (Responsable)
+Inspectores ||--o{ Visitas : asigna (Jefe)
+Inspectores ||--o{ Tareas : realiza (Responsable)
+Inspectores ||--o{ Tareas : asigna (Jefe)
+CentrosEducativos ||--o{ Visitas : recibe
+Visitas ||--o| Informes : contiene
+
 
 entity Desplazamientos {
     oid_Visita: int <<PK>> <<FK>> -> Visitas
@@ -141,14 +153,19 @@ entity Desplazamientos {
     Kilometros: int
     TarifaK: float
 }
+
+
 entity Dietas {
     oid_Visita: int <<PK>> <<FK>> -> Desplazamientos
     --
     Importe: int
     Almuerzo: bool
 }
+
+
 Desplazamientos |o--||Visitas
 Dietas |o--||Desplazamientos
+
 
 entity DiasAsuntosPersonales {
     oid_DAP: int <<PK>>
@@ -159,6 +176,7 @@ entity DiasAsuntosPersonales {
     
     
 }
+
 
 entity Cursos {
     curso: string <<PK>>
