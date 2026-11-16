@@ -12,13 +12,6 @@ entity "Centros Educativos" as CentrosEducativos {
     ProfesorResponsable: int <<FK>> <<AK>> [0..1] -> Profesores
 }
 
-entity Desplazamiento {
-
-}
-
-entity Dieta {
-
-}
 
 entity DocumentosCita {
     Num_solicitud: int <<PK>> <<FK>> -> Citas
@@ -81,9 +74,7 @@ entity Tarea {
     Descripcion
 }
 
-entity DiasAsuntosPersonales {
 
-}
 
 entity Zonas {
     Codigo: int <<PK>>
@@ -140,8 +131,49 @@ entity Tutela {
 
 }
 
+entity Desplazamientos {
+    oid_Visita: int <<PK>> <<FK>> -> Visitas
+    --
+    Origen: string
+    Destino: string
+    HoraSalida
+    HoraLlegadaDomicilio [0..1]
+    Kilometros: int
+    TarifaK: float
+}
+entity Dietas {
+    oid_Visita: int <<PK>> <<FK>> -> Desplazamientos
+    --
+    Importe: int
+    Almuerzo: bool
+}
+Desplazamientos |o--||Visitas
+Dietas |o--||Desplazamientos
+
+entity DiasAsuntosPersonales {
+    oid_DAP: int <<PK>>
+    --
+    inspector: int <<FK>> <<AK1>> -> Inspectores
+    Curso: int <<AK1>>
+    DiasSolicitados
+    
+    
+}
+
+entity Cursos {
+    curso: string <<PK>>
+    --
+    inspector: int <<FK>> -> Inspectores
+    DiasTotales
+
+}
+
+DiasAsuntosPersonales }o--||Cursos
+DiasAsuntosPersonales }o--||Inspectores
+
 '------- ASOCIACIONES --------------------------------------
 DocumentosCita }o--|| Citas
+
 @enduml
 
 
